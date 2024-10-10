@@ -68,7 +68,7 @@ export const NavbarEditPages = () => {
             "flex items-center gap-2 text-purple-500 font-medium",
           )}
         >
-          <Eye size={16} />
+          <Eye size={16} className="sm:hidden" />
           <span className="hidden sm:block">Preview</span>
         </Link>
       </header>

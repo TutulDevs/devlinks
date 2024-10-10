@@ -42,14 +42,14 @@ export const ProfileForm = () => {
               {/* uploader & preview */}
               <div className="relative w-[125px] h-[125px] rounded-md overflow-hidden group">
                 <Image
-                  src=""
+                  src="/avatar.jpg"
                   alt=""
                   fill
                   className="bg-indigo-300 rounded-md object-cover"
                 />
 
                 <div
-                  className="absolute inset-0 w-full h-full p-1 bg-gray-900/30 z-10 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out flex flex-col items-center justify-center gap-2 text-white text-sm font-medium "
+                  className="absolute inset-0 w-full h-full p-1 bg-gray-900/50 z-10 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out flex flex-col items-center justify-center gap-2 text-white text-sm font-medium "
                   onClick={() => alert("upload")}
                   role="button"
                 >

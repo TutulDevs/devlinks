@@ -22,3 +22,12 @@ export const PLATFORM_LIST = Object.values(PLATFORM)
     value: platform,
     label: PLATFORM_LABELS[platform],
   }));
+
+export const PLATFORM_COLORS = {
+  [PLATFORM.GITHUB]: { bg: "#24292e", text: "white" },
+  [PLATFORM.YOUTUBE]: { bg: "#FF0000", text: "white" },
+  [PLATFORM.X]: { bg: "#000000", text: "white" },
+  [PLATFORM.LINKEDIN]: { bg: "#0077B5", text: "white" },
+  [PLATFORM.TWITTER]: { bg: "#1DA1F2", text: "white" },
+  [PLATFORM.MEDIUM]: { bg: "#000000", text: "white" },
+};
