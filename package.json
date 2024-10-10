@@ -24,6 +24,7 @@
     "prettier-plugin-tailwindcss": "^0.6.8",
     "pretty-quick": "^4.0.0",
     "react": "^18",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "tailwind-merge": "^2.5.3",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",

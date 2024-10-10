@@ -1,10 +1,10 @@
 export enum PLATFORM {
-  GITHUB = 1,
-  YOUTUBE = 2,
-  X = 3,
-  LINKEDIN = 4,
-  TWITTER = 5,
-  MEDIUM = 6,
+  GITHUB = "github",
+  YOUTUBE = "youtube",
+  X = "x",
+  LINKEDIN = "linkedin",
+  TWITTER = "twitter",
+  MEDIUM = "medium",
 }
 
 export const PLATFORM_LABELS = {
@@ -17,7 +17,7 @@ export const PLATFORM_LABELS = {
 };
 
 export const PLATFORM_LIST = Object.values(PLATFORM)
-  .filter((x) => typeof x === "number")
+  .filter((x) => typeof x === "string")
   .map((platform) => ({
     value: platform,
     label: PLATFORM_LABELS[platform],
