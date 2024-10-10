@@ -26,6 +26,7 @@ import { z } from "zod";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { PLATFORM_LIST } from "@/lib/coreconstants";
+import { CardNeutral } from "../cards/CardNeutral";
 
 export const LinksForm = () => {
   return (
@@ -55,7 +56,7 @@ export const LinksForm = () => {
 
 const LinkCard = () => {
   return (
-    <div className="p-3 space-y-3 bg-neutral-100 rounded-md">
+    <CardNeutral>
       {/* top */}
       <div className="flex justify-between items-center ">
         <div className="flex items-center gap-1">
@@ -90,6 +91,6 @@ const LinkCard = () => {
 
         <Input type="url" id="1_u" placeholder="Enter link" />
       </div>
-    </div>
+    </CardNeutral>
   );
 };

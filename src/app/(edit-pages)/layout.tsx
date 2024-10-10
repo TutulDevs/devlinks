@@ -13,14 +13,14 @@ export default function EditPagesLayout({
       <NavbarEditPages />
 
       {/* main */}
-      <main className="mx-4 mb-4 grid grid-cols-1 md:grid-cols-[auto_1fr] items-start gap-4">
-        <div className="bg-white rounded-md md:px-10 py-6 md:py-8 order-2 md:order-1">
+      <main className="mx-4 mb-4 grid grid-cols-1 lg:grid-cols-[auto_1fr] items-start gap-4">
+        <div className="bg-white rounded-md lg:px-10 py-6 lg:py-8 order-2 lg:order-1">
           <PhoneMockup>
             <CardProfile className="py-4" />
           </PhoneMockup>
         </div>
 
-        <div className="bg-white rounded-md order-1 md:order-2">{children}</div>
+        <div className="bg-white rounded-md order-1 lg:order-2">{children}</div>
       </main>
     </>
   );
