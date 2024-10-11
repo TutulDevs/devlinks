@@ -1,6 +1,15 @@
 import { LinksForm } from "@/components/forms/LinksForm";
+import { createClient_server } from "@/lib/supabase/server";
 
-export default function LinksPage() {
+export default async function LinksPage() {
+  const supabase = createClient_server();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  console.log("dl: /link page user: ", user);
+
   return (
     <>
       <div className="px-6 pt-8">

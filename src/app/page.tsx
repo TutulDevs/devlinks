@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 
 export default function Home() {
-  redirect("/links");
+  redirect("/login");
 
   return (
     <div>
