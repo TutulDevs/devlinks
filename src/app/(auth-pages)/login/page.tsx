@@ -7,14 +7,8 @@ import Link from "next/link";
 
 export default function Login({ searchParams }: { searchParams: Message }) {
   return (
-    <form className="flex-1 flex flex-col min-w-64 mx-auto bg-white rounded-md p-4 mt-8">
-      <h1 className="text-2xl font-medium">Sign in</h1>
-      <p className="text-sm text-foreground">
-        Don't have an account?{" "}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
-          Sign up
-        </Link>
-      </p>
+    <form className="flex-1 flex flex-col w-80 mx-auto bg-white rounded-md p-4 mt-8">
+      <h1 className="text-2xl font-medium">Authenticate</h1>
 
       <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
         <Label htmlFor="email">Email</Label>
@@ -35,9 +29,21 @@ export default function Login({ searchParams }: { searchParams: Message }) {
           required
         />
 
-        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
-          Sign in
-        </SubmitButton>
+        <div className="grid grid-cols-2 gap-6">
+          <SubmitButton
+            // pendingText="Signing In..."
+            formAction={signInAction}
+          >
+            Sign in
+          </SubmitButton>
+
+          <SubmitButton
+            // pendingText="Signing up..."
+            formAction={signUpAction}
+          >
+            Sign up
+          </SubmitButton>
+        </div>
 
         <FormMessage message={searchParams} />
       </div>

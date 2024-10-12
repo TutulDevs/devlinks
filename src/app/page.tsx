@@ -14,11 +14,15 @@ export default async function Home() {
   return (
     <div className="flex items-center justify-between gap-4 m-4 p-4 bg-white rounded-md">
       <div className="flex gap-2">
-        <Button asChild size="sm" variant={"outline"}>
+        <Button asChild size="sm" variant={"link"}>
           <Link href="/links">Links</Link>
         </Button>
-        <Button asChild size="sm" variant={"default"}>
+        <Button asChild size="sm" variant={"link"}>
           <Link href="/profile">Profile</Link>
+        </Button>
+
+        <Button asChild size="sm" variant={"link"}>
+          <Link href="/preview">Preview</Link>
         </Button>
       </div>
 
@@ -26,20 +30,13 @@ export default async function Home() {
         <div className="flex items-center gap-4">
           Hey, {user.email}!
           <form action={signOutAction}>
-            <Button type="submit" variant={"outline"}>
-              Sign out
-            </Button>
+            <Button type="submit">Sign out</Button>
           </form>
         </div>
       ) : (
-        <div className="flex gap-2">
-          <Button asChild size="sm" variant={"outline"}>
-            <Link href="/sign-in">Sign in</Link>
-          </Button>
-          <Button asChild size="sm" variant={"default"}>
-            <Link href="/sign-up">Sign up</Link>
-          </Button>
-        </div>
+        <Button asChild size="sm">
+          <Link href="/login">Login</Link>
+        </Button>
       )}
     </div>
   );
