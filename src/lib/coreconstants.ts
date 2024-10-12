@@ -14,6 +14,14 @@ export const PLATFORM_LABELS = {
   [PLATFORM.MEDIUM]: "Medium",
 };
 
+export const PLATFORM_ICONS = {
+  [PLATFORM.GITHUB]: "/socials/github.svg",
+  [PLATFORM.YOUTUBE]: "/socials/youtube.svg",
+  [PLATFORM.X]: "/socials/x.svg",
+  [PLATFORM.LINKEDIN]: "/socials/linkedin.svg",
+  [PLATFORM.MEDIUM]: "/socials/medium.svg",
+};
+
 export const PLATFORM_LIST = Object.values(PLATFORM)
   .filter((x) => typeof x === "string")
   .map((platform) => ({

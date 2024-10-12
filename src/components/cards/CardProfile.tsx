@@ -1,6 +1,7 @@
 import {
   MAX_LINKS_FALLBACK,
   PLATFORM_COLORS,
+  PLATFORM_ICONS,
   PLATFORM_LABELS,
 } from "@/lib/coreconstants";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { getUserData, getUserLinks } from "@/app/actions";
 import { CardProfileImage } from "./CardProfileImage";
+import Image from "next/image";
 
 export const CardProfile: React.FC<{ className?: string }> = async ({
   className,
@@ -54,9 +56,15 @@ export const CardProfile: React.FC<{ className?: string }> = async ({
               backgroundColor: PLATFORM_COLORS[x.platform].bg,
               color: PLATFORM_COLORS[x.platform].text,
             }}
-            className={cn(buttonVariants({}), "")}
+            className={cn(buttonVariants({}), "gap-2")}
           >
-            <span>{PLATFORM_LABELS[x.platform]}</span>
+            <Image
+              src={PLATFORM_ICONS[x.platform]}
+              alt={""}
+              width={18}
+              height={18}
+            />
+            <span className="flex-1">{PLATFORM_LABELS[x.platform]}</span>
             <ArrowRight size={14} className="ml-auto" />
           </Link>
         ))}

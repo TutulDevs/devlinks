@@ -2,13 +2,9 @@
 
 DevLinks is an open-source platform that allows developers to create and manage a personalized link-sharing profile.
 
-**Table of Contents**
-
-[TOCM]
-
-[TOC]
-
 ## Project Requirements
+
+The main challenge [Link-sharing app](https://www.frontendmentor.io/challenges/linksharing-app-Fbt7yweGsT)
 
 - ✅ Create, read, update, delete links and see previews in the mobile mockup
 - ✅ Receive validations if the links form is submitted without a URL or with the wrong URL pattern for the platform
@@ -27,7 +23,7 @@ DevLinks is built using the following technologies:
 
 - [Framework] Next.js 14 (App Router)
 - [Language] TypeScript
-- [UI Framework] Tailwind CSS, Shadcn UI
+- [UI Framework] Tailwind CSS, ShadCN UI
 - [Form Management] React Hook Form, Zod
 
 ## Deployment
