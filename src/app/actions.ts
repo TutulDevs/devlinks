@@ -1,5 +1,6 @@
 "use server";
 
+import { UserData } from "@/lib/definitions";
 import { createClient } from "@/lib/supabase/server";
 import { encodedRedirect } from "@/lib/utils";
 import { headers } from "next/headers";
@@ -131,4 +132,38 @@ export const signOutAction = async () => {
   const supabase = createClient();
   await supabase.auth.signOut();
   return redirect("/login");
+};
+
+export const getUserData = async (): Promise<UserData> => {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Fetch the user's profile from the 'userData' table
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user?.id)
+    .single();
+
+  const { data: avatar } = supabase.storage
+    .from("avatars")
+    .getPublicUrl(profile?.avatar_url);
+
+  // console.log("dl: avatar", {
+  //   avP: profile?.avatar_url,
+  //   avA: avatar.publicUrl,
+  // });
+
+  const userData: UserData = {
+    id: user?.id ?? "",
+    email: user?.email ?? "",
+    firstName: profile?.first_name ?? "",
+    lastName: profile?.last_name ?? "",
+    avatarUrl: avatar?.publicUrl ?? "",
+  };
+
+  return userData;
 };

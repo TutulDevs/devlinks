@@ -1,6 +1,9 @@
+import { getUserData } from "@/app/actions";
 import { ProfileForm } from "@/components/forms/ProfileForm";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const user = await getUserData();
+
   return (
     <>
       <div className="px-6 pt-8">
@@ -11,7 +14,7 @@ export default function ProfilePage() {
         </p>
       </div>
 
-      <ProfileForm />
+      <ProfileForm user={user} />
     </>
   );
 }

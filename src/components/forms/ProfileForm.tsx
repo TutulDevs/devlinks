@@ -19,6 +19,8 @@ import { Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { CardNeutral } from "../cards/CardNeutral";
+import { UserData } from "@/lib/definitions";
+import { createClient } from "@/lib/supabase/client";
 
 // Custom file validation function
 const validateImageFile = (file: File) => {
@@ -64,16 +66,17 @@ const formSchema = z.object({
 // Infer the type from the schema
 type FormValues = z.infer<typeof formSchema>;
 
-export const ProfileForm = () => {
+export const ProfileForm: React.FC<{ user: UserData }> = ({ user }) => {
   const router = useRouter();
   const { toast } = useToast();
+  const supabase = createClient();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
       // avatar is not included in defaultValues as it's a File object
     },
   });
@@ -82,7 +85,35 @@ export const ProfileForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      console.log("dl: form submit", data);
+      const updates = {
+        id: user.id,
+        first_name: data.firstName,
+        last_name: data.lastName,
+        updated_at: new Date().toISOString(),
+      };
+
+      let { error } = await supabase.from("profiles").upsert(updates);
+
+      if (error) throw error;
+
+      if (data.avatar instanceof File) {
+        const fileExt = data.avatar.name.split(".").pop();
+        const filePath = `${user.id}-${Math.random()}.${fileExt}`;
+
+        let { error: uploadError } = await supabase.storage
+          .from("avatars")
+          .upload(filePath, data.avatar);
+
+        if (uploadError) throw uploadError;
+
+        let { error: updateError } = await supabase
+          .from("profiles")
+          .update({ avatar_url: filePath })
+          .eq("id", user.id);
+
+        if (updateError) throw updateError;
+      }
+
       toast({
         description: (
           <>
@@ -101,6 +132,7 @@ export const ProfileForm = () => {
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
       });
+      console.error("Error updating profile:", error);
     }
   };
 
@@ -228,6 +260,7 @@ export const ProfileForm = () => {
                       id="email"
                       placeholder="Enter email"
                       {...field}
+                      readOnly
                     />
                   </FormControl>
                   <div className="hidden sm:block" />
@@ -245,3 +278,25 @@ export const ProfileForm = () => {
     </Form>
   );
 };
+
+// try {
+//   console.log("dl: form submit", data);
+//   toast({
+//     description: (
+//       <>
+//         <div className="flex items-center justify-center gap-2">
+//           <Save size={16} />
+//           <span>{`Your changes have been successfully saved!`}</span>
+//         </div>
+//       </>
+//     ),
+//     className: "bg-gray-700 text-white border-0 py-2",
+//   });
+//   router.refresh();
+// } catch (error) {
+//   toast({
+//     variant: "destructive",
+//     title: "Uh oh! Something went wrong.",
+//     description: "There was a problem with your request.",
+//   });
+// }

@@ -5,30 +5,33 @@ import {
 } from "@/lib/coreconstants";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
+import { getUserData } from "@/app/actions";
+import Image from "next/image";
 
 const DUMMY_PLATFORMS = [PLATFORM.GITHUB, PLATFORM.YOUTUBE, PLATFORM.LINKEDIN];
 
-export const CardProfile: React.FC<{ className?: string }> = ({
+export const CardProfile: React.FC<{ className?: string }> = async ({
   className,
 }) => {
+  const user = await getUserData();
+
   return (
     <div className={cn("bg-white rounded-md px-4 py-8 space-y-6", className)}>
       {/* info */}
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden border-4 border-purple-500">
           <Image
-            src="/avatar.jpg"
-            alt="profile"
+            src={user.avatarUrl}
+            alt={`${user.firstName} ${user.lastName}`}
             fill
             className="object-cover"
           />
         </div>
 
-        <h3 className="font-bold text-2xl">Ben Wright</h3>
-        <p className="text-sm text-gray-500">{"ben@example.com"}</p>
+        <h3 className="font-bold text-2xl">{`${user.firstName} ${user.lastName}`}</h3>
+        <p className="text-sm text-gray-500">{user?.email}</p>
       </div>
 
       {/* links */}
