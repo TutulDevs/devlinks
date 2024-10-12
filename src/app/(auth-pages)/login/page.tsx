@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Login({ searchParams }: { searchParams: Message }) {
   return (
-    <form className="flex-1 flex flex-col w-80 mx-auto bg-white rounded-md p-4 mt-8">
+    <form className="flex-1 flex flex-col w-full sm:w-80 mx-auto bg-white rounded-md p-4">
       <h1 className="text-2xl font-medium">Authenticate</h1>
 
       <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
@@ -15,12 +15,12 @@ export default function Login({ searchParams }: { searchParams: Message }) {
         <Input name="email" placeholder="you@example.com" required />
         <div className="flex justify-between items-center">
           <Label htmlFor="password">Password</Label>
-          <Link
+          {/* <Link
             className="text-xs text-foreground underline"
             href="/forgot-password"
           >
             Forgot Password?
-          </Link>
+          </Link> */}
         </div>
         <Input
           type="password"

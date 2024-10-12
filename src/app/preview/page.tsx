@@ -11,7 +11,7 @@ export default function ProfilePage() {
       <NavbarPreview />
 
       {/* card */}
-      <CardProfile className="w-[300px] mx-auto mt-20" />
+      <CardProfile className="w-[300px] mx-auto mt-20 mb-8" />
     </>
   );
 }

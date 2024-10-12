@@ -1,5 +1,5 @@
 import {
-  PLATFORM,
+  MAX_LINKS_FALLBACK,
   PLATFORM_COLORS,
   PLATFORM_LABELS,
 } from "@/lib/coreconstants";
@@ -7,16 +7,16 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
-import { getUserData } from "@/app/actions";
-import Image from "next/image";
+import { getUserData, getUserLinks } from "@/app/actions";
 import { CardProfileImage } from "./CardProfileImage";
-
-const DUMMY_PLATFORMS = [PLATFORM.GITHUB, PLATFORM.YOUTUBE, PLATFORM.LINKEDIN];
 
 export const CardProfile: React.FC<{ className?: string }> = async ({
   className,
 }) => {
   const user = await getUserData();
+  const userLinks = await getUserLinks(user.id);
+
+  const linksToShow = MAX_LINKS_FALLBACK - userLinks.length;
 
   return (
     <div className={cn("bg-white rounded-md px-4 py-8 space-y-6", className)}>
@@ -44,21 +44,25 @@ export const CardProfile: React.FC<{ className?: string }> = async ({
 
       {/* links */}
       <div className="flex flex-col gap-3 max-w-52 mx-auto">
-        {DUMMY_PLATFORMS.map((platform) => (
+        {userLinks.map((x) => (
           <Link
-            key={platform}
-            href={"/"}
+            key={x.url}
+            href={x.url}
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              backgroundColor: PLATFORM_COLORS[platform].bg,
-              color: PLATFORM_COLORS[platform].text,
+              backgroundColor: PLATFORM_COLORS[x.platform].bg,
+              color: PLATFORM_COLORS[x.platform].text,
             }}
             className={cn(buttonVariants({}), "")}
           >
-            <span>{PLATFORM_LABELS[platform]}</span>
+            <span>{PLATFORM_LABELS[x.platform]}</span>
             <ArrowRight size={14} className="ml-auto" />
           </Link>
+        ))}
+
+        {Array.from({ length: linksToShow }).map((_, index) => (
+          <div key={index} className="w-full h-10 bg-gray-100 rounded-md" />
         ))}
       </div>
     </div>

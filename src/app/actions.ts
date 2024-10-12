@@ -1,6 +1,6 @@
 "use server";
 
-import { UserData } from "@/lib/definitions";
+import { UserData, UserLink } from "@/lib/definitions";
 import { createClient } from "@/lib/supabase/server";
 import { encodedRedirect } from "@/lib/utils";
 import { headers } from "next/headers";
@@ -166,4 +166,19 @@ export const getUserData = async (): Promise<UserData> => {
   };
 
   return userData;
+};
+
+export const getUserLinks = async (userId: string): Promise<UserLink[]> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from("user_links")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error || !data || data.length === 0) {
+    return [];
+  }
+
+  return data;
 };

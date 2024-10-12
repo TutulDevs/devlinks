@@ -3,7 +3,6 @@ export enum PLATFORM {
   YOUTUBE = "youtube",
   X = "x",
   LINKEDIN = "linkedin",
-  TWITTER = "twitter",
   MEDIUM = "medium",
 }
 
@@ -12,7 +11,6 @@ export const PLATFORM_LABELS = {
   [PLATFORM.YOUTUBE]: "YouTube",
   [PLATFORM.X]: "X",
   [PLATFORM.LINKEDIN]: "LinkedIn",
-  [PLATFORM.TWITTER]: "Twitter",
   [PLATFORM.MEDIUM]: "Medium",
 };
 
@@ -24,10 +22,11 @@ export const PLATFORM_LIST = Object.values(PLATFORM)
   }));
 
 export const PLATFORM_COLORS = {
-  [PLATFORM.GITHUB]: { bg: "#24292e", text: "white" },
+  [PLATFORM.GITHUB]: { bg: "#30363D", text: "white" },
   [PLATFORM.YOUTUBE]: { bg: "#FF0000", text: "white" },
   [PLATFORM.X]: { bg: "#000000", text: "white" },
-  [PLATFORM.LINKEDIN]: { bg: "#0077B5", text: "white" },
-  [PLATFORM.TWITTER]: { bg: "#1DA1F2", text: "white" },
+  [PLATFORM.LINKEDIN]: { bg: "#0a66c2", text: "white" },
   [PLATFORM.MEDIUM]: { bg: "#000000", text: "white" },
 };
+
+export const MAX_LINKS_FALLBACK = 3;

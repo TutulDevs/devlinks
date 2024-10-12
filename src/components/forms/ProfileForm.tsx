@@ -54,11 +54,11 @@ const formSchema = z.object({
     .instanceof(File)
     .refine(
       (file) => file.size <= 5 * 1024 * 1024,
-      "File size should be less than 5MB"
+      "File size should be less than 5MB",
     )
     .refine(
       (file) => ["image/png", "image/jpeg", "image/bmp"].includes(file.type),
-      "Only PNG, JPG, or BMP files are allowed"
+      "Only PNG, JPG, or BMP files are allowed",
     )
     .refine(validateImageFile, "Image dimensions should not exceed 1024x1024px")
     .optional(),
@@ -93,7 +93,7 @@ export const ProfileForm: React.FC<{ user: UserData }> = ({ user }) => {
         updated_at: new Date().toISOString(),
       };
 
-      let { error } = await supabase.from("profiles").upsert(updates);
+      const { error } = await supabase.from("profiles").upsert(updates);
 
       if (error) throw error;
 
@@ -101,13 +101,13 @@ export const ProfileForm: React.FC<{ user: UserData }> = ({ user }) => {
         const fileExt = data.avatar.name.split(".").pop();
         const filePath = `${user.id}-${Math.random()}.${fileExt}`;
 
-        let { error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from("avatars")
           .upload(filePath, data.avatar);
 
         if (uploadError) throw uploadError;
 
-        let { error: updateError } = await supabase
+        const { error: updateError } = await supabase
           .from("profiles")
           .update({ avatar_url: filePath })
           .eq("id", user.id);
@@ -163,7 +163,7 @@ export const ProfileForm: React.FC<{ user: UserData }> = ({ user }) => {
                         alt=""
                         fill
                         className={cn(
-                          "bg-indigo-100 rounded-md object-cover absolute inset-0 w-full h-full"
+                          "bg-indigo-100 rounded-md object-cover absolute inset-0 w-full h-full",
                         )}
                       />
 

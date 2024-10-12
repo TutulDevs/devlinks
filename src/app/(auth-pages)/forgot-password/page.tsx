@@ -13,12 +13,12 @@ export default function ForgotPassword({
 }) {
   return (
     <>
-      <form className="flex-1 flex flex-col w-full gap-2 text-foreground [&>input]:mb-6 min-w-64 max-w-64 mx-auto">
+      <form className="flex-1 flex flex-col w-full sm:w-80 mx-auto bg-white rounded-md p-4">
         <div>
           <h1 className="text-2xl font-medium">Reset Password</h1>
           <p className="text-sm text-secondary-foreground">
             Already have an account?{" "}
-            <Link className="text-primary underline" href="/sign-in">
+            <Link className="text-primary underline" href="/login">
               Sign in
             </Link>
           </p>
