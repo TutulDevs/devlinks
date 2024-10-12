@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { CardNeutral } from "../cards/CardNeutral";
 import { UserData } from "@/lib/definitions";
 import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
 
 // Custom file validation function
 const validateImageFile = (file: File) => {
@@ -53,11 +54,11 @@ const formSchema = z.object({
     .instanceof(File)
     .refine(
       (file) => file.size <= 5 * 1024 * 1024,
-      "File size should be less than 5MB",
+      "File size should be less than 5MB"
     )
     .refine(
       (file) => ["image/png", "image/jpeg", "image/bmp"].includes(file.type),
-      "Only PNG, JPG, or BMP files are allowed",
+      "Only PNG, JPG, or BMP files are allowed"
     )
     .refine(validateImageFile, "Image dimensions should not exceed 1024x1024px")
     .optional(),
@@ -154,15 +155,16 @@ export const ProfileForm: React.FC<{ user: UserData }> = ({ user }) => {
                       className="relative w-[125px] h-[125px] rounded-md overflow-hidden group"
                     >
                       <ImageNext
-                        // src="/avatar.jpg"
                         src={
                           avatar instanceof File
                             ? URL.createObjectURL(avatar)
-                            : ""
+                            : user.avatarUrl
                         }
                         alt=""
                         fill
-                        className="bg-indigo-300 rounded-md object-cover"
+                        className={cn(
+                          "bg-indigo-100 rounded-md object-cover absolute inset-0 w-full h-full"
+                        )}
                       />
 
                       <Input
@@ -278,25 +280,3 @@ export const ProfileForm: React.FC<{ user: UserData }> = ({ user }) => {
     </Form>
   );
 };
-
-// try {
-//   console.log("dl: form submit", data);
-//   toast({
-//     description: (
-//       <>
-//         <div className="flex items-center justify-center gap-2">
-//           <Save size={16} />
-//           <span>{`Your changes have been successfully saved!`}</span>
-//         </div>
-//       </>
-//     ),
-//     className: "bg-gray-700 text-white border-0 py-2",
-//   });
-//   router.refresh();
-// } catch (error) {
-//   toast({
-//     variant: "destructive",
-//     title: "Uh oh! Something went wrong.",
-//     description: "There was a problem with your request.",
-//   });
-// }

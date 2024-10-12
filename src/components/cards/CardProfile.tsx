@@ -9,6 +9,7 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { getUserData } from "@/app/actions";
 import Image from "next/image";
+import { CardProfileImage } from "./CardProfileImage";
 
 const DUMMY_PLATFORMS = [PLATFORM.GITHUB, PLATFORM.YOUTUBE, PLATFORM.LINKEDIN];
 
@@ -21,17 +22,24 @@ export const CardProfile: React.FC<{ className?: string }> = async ({
     <div className={cn("bg-white rounded-md px-4 py-8 space-y-6", className)}>
       {/* info */}
       <div className="flex flex-col items-center justify-center gap-4">
-        <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden border-4 border-purple-500">
-          <Image
-            src={user.avatarUrl}
-            alt={`${user.firstName} ${user.lastName}`}
-            fill
-            className="object-cover"
-          />
-        </div>
+        <CardProfileImage
+          src={user.avatarUrl}
+          alt={`${user.firstName} ${user.lastName}`}
+        />
 
-        <h3 className="font-bold text-2xl">{`${user.firstName} ${user.lastName}`}</h3>
-        <p className="text-sm text-gray-500">{user?.email}</p>
+        <h3
+          className={cn("font-bold text-2xl", {
+            ["bg-gray-100 py-4 w-3/4 rounded-md"]:
+              !user.firstName && !user.lastName,
+          })}
+        >{`${user.firstName} ${user.lastName}`}</h3>
+        <p
+          className={cn("text-sm text-gray-500", {
+            ["bg-gray-100 py-3 w-1/2 rounded-md"]: !user.email,
+          })}
+        >
+          {user?.email}
+        </p>
       </div>
 
       {/* links */}
