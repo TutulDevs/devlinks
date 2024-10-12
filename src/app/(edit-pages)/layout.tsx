@@ -1,6 +1,7 @@
 import { CardProfile } from "@/components/cards/CardProfile";
 import { PhoneMockup } from "@/components/mockups/PhoneMockup";
 import { NavbarEditPages } from "@/components/navbars/NavbarEditPages";
+import { Suspense } from "react";
 
 export default function EditPagesLayout({
   children,
@@ -16,7 +17,9 @@ export default function EditPagesLayout({
       <main className="mx-4 mb-4 grid grid-cols-1 lg:grid-cols-[auto_1fr] items-start gap-4">
         <div className="bg-white rounded-md lg:px-10 py-6 lg:py-8 order-2 lg:order-1">
           <PhoneMockup>
-            <CardProfile className="py-4" />
+            <Suspense fallback={<div>Loading...</div>}>
+              <CardProfile className="py-4" />
+            </Suspense>
           </PhoneMockup>
         </div>
 
