@@ -1,14 +1,17 @@
 import { LinksForm } from "@/components/forms/LinksForm";
-import { createClient_server } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function LinksPage() {
-  const supabase = createClient_server();
+  const supabase = createClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: notes } = await supabase.from("notes").select();
+
   console.log("dl: /link page user: ", user);
+  console.log("dl: /link page notes: ", notes);
 
   return (
     <>
